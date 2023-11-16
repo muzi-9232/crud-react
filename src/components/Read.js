@@ -4,12 +4,14 @@ import { NavLink } from "react-router-dom";
 
 const Read = () => {
   const [apiData, setApiData] = useState([]);
+  const [loading,setLoading] = useState(true)
 
   function getData() {
     axios
       .get("https://64a5527700c3559aa9bf7963.mockapi.io/crud-app")
       .then((res) => {
         setApiData(res.data);
+        setLoading(false)
       });
   }
 
@@ -33,6 +35,14 @@ const Read = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  if(loading){
+    return(
+      <div>
+        <h1>Loading................</h1>
+      </div>
+    )
+  }
 
   return (
     <>
